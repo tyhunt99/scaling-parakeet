@@ -3,7 +3,6 @@ package application
 import (
 	"encoding/json"
 	"fmt"
-	"strings"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
@@ -153,10 +152,6 @@ func (app *Application) HandleRequest(request events.APIGatewayProxyRequest) (ev
 	var users []*User
 	var err error
 	var response events.APIGatewayProxyResponse
-	// TODO: add better path checking
-	if !strings.HasPrefix(request.Path, "/users") {
-		return events.APIGatewayProxyResponse{StatusCode: 404, Body: "Invalid request"}, nil
-	}
 
 	// create DynamoDB client
 	sess := session.Must(session.NewSessionWithOptions(session.Options{
@@ -190,7 +185,7 @@ func (app *Application) HandleRequest(request events.APIGatewayProxyRequest) (ev
 		err = app.deleteUser(request.PathParameters["id"])
 		response = events.APIGatewayProxyResponse{StatusCode: 204}
 	default:
-		response = events.APIGatewayProxyResponse{StatusCode: 400, Body: "Invalid request"}
+		response = events.APIGatewayProxyResponse{StatusCode: 400, Body: fmt.Sprintf("Invalid request %s", request.HTTPMethod)}
 	}
 
 	if err != nil {
