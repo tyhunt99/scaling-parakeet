@@ -1,0 +1,69 @@
+app: scaling-parakeet
+service: scaling-parakeet
+
+frameworkVersion: "3"
+
+# plugins:
+#   - serverless-offline
+
+provider:
+  name: aws
+  runtime: go1.x
+  environment:
+    DYNAMODB_TABLE: ${self:service}-${sls:stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: "arn:aws:dynamodb:${aws:region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+
+functions:
+  handler:
+    handler: bin/scaling-parakeet
+    package:
+      include:
+        - ./bin/scaling-parakeet
+    events:
+      - httpApi:
+          path: /users
+          method: POST
+
+      # - httpApi:
+      #     path: /users
+      #     method: GET
+
+      # - httpApi:
+      #     path: /users/{id}
+      #     method: GET
+
+      # - httpApi:
+      #     path: /users/{id}
+      #     method: PUT
+
+      # - httpApi:
+      #     path: /users/{id}
+      #     method: DELETE
+
+resources:
+  Resources:
+    AppDynamoDbTable:
+      Type: "AWS::DynamoDB::Table"
+      # DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
