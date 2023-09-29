@@ -35,21 +35,21 @@ functions:
           path: /users
           method: POST
 
-      # - httpApi:
-      #     path: /users
-      #     method: GET
+      - httpApi:
+          path: /users
+          method: GET
 
-      # - httpApi:
-      #     path: /users/{id}
-      #     method: GET
+      - httpApi:
+          path: /users/{id}
+          method: GET
 
-      # - httpApi:
-      #     path: /users/{id}
-      #     method: PUT
+      - httpApi:
+          path: /users/{id}
+          method: PUT
 
-      # - httpApi:
-      #     path: /users/{id}
-      #     method: DELETE
+      - httpApi:
+          path: /users/{id}
+          method: DELETE
 
 resources:
   Resources:

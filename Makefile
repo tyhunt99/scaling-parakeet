@@ -8,8 +8,12 @@ build:
 clean:
 	go clean
 
+# TODO: get this working with a labmda mock
 run: build
 	bin/${BINARY_NAME}
+
+deploy: build
+	serverless deploy --function handler
 
 test:
 	go test ./...
