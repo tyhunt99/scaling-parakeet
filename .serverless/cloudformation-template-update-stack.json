@@ -174,7 +174,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/scaling-parakeet/dev/1695936639902-2023-09-28T21:30:39.902Z/scaling-parakeet.zip"
+          "S3Key": "serverless/scaling-parakeet/dev/1696022665175-2023-09-29T21:24:25.175Z/scaling-parakeet.zip"
         },
         "Handler": "bin/scaling-parakeet",
         "Runtime": "go1.x",
@@ -197,14 +197,14 @@
         "HandlerLogGroup"
       ]
     },
-    "HandlerLambdaVersionfZVawuuBFrz6MhY4ygB375vHwQTRdbFpomtuOUITc": {
+    "HandlerLambdaVersionwMfS1vjFWdQGkJheLsXwlfUhm27QcAfCjDQtWsVzrM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HandlerLambdaFunction"
         },
-        "CodeSha256": "LhKEy0MxnHmTZYLlBvw7Kk4K17ILWunOyTc0mebSfWk="
+        "CodeSha256": "s9JhKWk9HfDuhZ2Ir0OgjglnCypS4M2G69coztkr3ko="
       }
     },
     "HttpApi": {
@@ -337,7 +337,7 @@
     "HandlerLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HandlerLambdaVersionfZVawuuBFrz6MhY4ygB375vHwQTRdbFpomtuOUITc"
+        "Ref": "HandlerLambdaVersionwMfS1vjFWdQGkJheLsXwlfUhm27QcAfCjDQtWsVzrM"
       },
       "Export": {
         "Name": "sls-scaling-parakeet-dev-HandlerLambdaFunctionQualifiedArn"
