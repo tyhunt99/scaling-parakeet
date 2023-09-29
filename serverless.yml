@@ -8,6 +8,7 @@ frameworkVersion: "3"
 
 provider:
   name: aws
+  deploymentMethod: direct
   runtime: go1.x
   environment:
     DYNAMODB_TABLE: ${self:service}-${sls:stage}
