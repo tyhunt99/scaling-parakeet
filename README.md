@@ -73,6 +73,12 @@ For a full deploy of the whole stack. not this is potentially destructive and co
 serverless deploy
 ```
 
+Once deployed the following command can be use to get information about the deployment
+
+```bash
+serverless info
+```
+
 ### Testing
 
 To run full tests:
